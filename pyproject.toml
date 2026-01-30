@@ -7,7 +7,13 @@ authors = [
     { name = "David Cohen", email = "wezelball@gmail.com" }
 ]
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "astropy>=6.1.7",
+    "plotly>=6.5.2",
+    "skyfield>=1.54",
+    "streamlit>=1.53.1",
+    "tomli>=2.4.0",
+]
 
 [project.scripts]
 astro-planner = "astro_planner:main"
