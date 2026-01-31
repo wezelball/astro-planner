@@ -7,8 +7,8 @@ This repository contains:
 TBD
 
 ## Quick Start (end user)
-1. Install latest release
-pip install astro-planner
+1. Install latest release <br>
+pip install astro-planner <br>
 
 2. Run (opens browser at http://localhost:8501) <br>
 astro-planner
@@ -59,7 +59,7 @@ unzip -l dist/astro_planner-*.whl | grep -E "(NGC.csv|de421.bsp)" <br>
 Should list your data files <br>
 
 #### Testing
-# Run tests (add pytest to dev deps first)
+Run tests (add pytest to dev deps first) <br>
 uv run pytest <br>
 
 #### Lint
