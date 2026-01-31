@@ -1,7 +1,7 @@
 [project]
 name = "astro-planner"
 version = "0.1.0"
-description = "Add your description here"
+description = "A python/streamlit application for finding candidates for astrophotography"
 readme = "README.md"
 authors = [
     { name = "David Cohen", email = "wezelball@gmail.com" }
@@ -16,8 +16,14 @@ dependencies = [
 ]
 
 [project.scripts]
-astro-planner = "astro_planner:main"
+astro-planner = "astro_planner.main:main"
 
 [build-system]
-requires = ["uv_build>=0.9.28,<0.10.0"]
-build-backend = "uv_build"
+requires = ["setuptools>=61.0"] 
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+package = true
+
+[tool.setuptools.package-data]
+"astro_planner" = ["data/*", "skyfield_data/*", "horizon/*", "config/*"]

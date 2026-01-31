@@ -4,7 +4,7 @@ import numpy as np
 from skyfield.api import Loader, Topos, Star, wgs84, load
 import pandas as pd
 from datetime import datetime, timedelta
-from moon import moon_position_topocentric, moon_separation_deg_from_apparent
+from .moon import moon_position_topocentric, moon_separation_deg_from_apparent
 
 # We try to import skyfield; if not available we will raise an informative error at runtime.
 try:

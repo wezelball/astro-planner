@@ -3,23 +3,23 @@ from streamlit.web import cli as stcli  # for recent Streamlit versions
 import streamlit as st
 from datetime import datetime, date, time, timedelta, timezone
 from zoneinfo import ZoneInfo   # Python 3.9+
-from config_loader import load_config
-from catalog import load_openngc_catalog
-from horizon import parse_horizon_file
-from planner import Planner
-from optics import Optics
-from moon import (
+from astro_planner.config_loader import load_config
+from astro_planner.catalog import load_openngc_catalog
+from astro_planner.horizon import parse_horizon_file
+from astro_planner.planner import Planner
+from astro_planner.optics import Optics
+from astro_planner.moon import (
     moon_phase_info,
     moon_position_topocentric,
 )
 import pandas as pd
 from math import isnan
-from plotting import plot_sky_polar
-from skyfield.api import Loader, wgs84
+from astro_planner.plotting import plot_sky_polar
+from skyfield.api import Loader, wgs84, load_file
 from skyfield import almanac
 
-from paths import DATA_DIR, CONFIG_DIR, HORIZON_DIR, SKYFIELD_DIR
-
+from astro_planner.paths import DATA_DIR, CONFIG_DIR, HORIZON_DIR, SKYFIELD_DIR
+import astro_planner
 
 LOCAL_TZ = ZoneInfo("America/New_York")
 
@@ -117,7 +117,8 @@ def main():
     elev = config["location"]["elevation_m"]
     load = Loader('./skyfield_data')
     ts = load.timescale()
-    eph = load('de421.bsp')
+    eph = load_file(SKYFIELD_DIR / "de421.bsp")  # Local file
+    #eph = load('de421.bsp')
 
     # Used for almanac functions
     topos = wgs84.latlon(lat, lon, elevation_m=elev)
@@ -383,6 +384,11 @@ def main():
         st.dataframe(df_left_justified, width="stretch")
     else:
         st.write("No candidates found with current filters.")
+
+    import subprocess
+    import sys
+    subprocess.run([sys.executable, "-m", "streamlit", "run", 
+                   __file__, "--server.port", "8501"])
 
 if __name__ == "__main__":
     # If already running under Streamlit, just call main()
